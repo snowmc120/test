@@ -1,0 +1,901 @@
+mod made by bao
+text
+
+████████████████████████████████████████████
+█                 PALOFSC                   █
+█   WEB TÀI XỈU - GIAO DIỆN GIỐNG XOC88.CC  █
+████████████████████████████████████████████
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XÓC ĐĨA - TÀI XỈU ONLINE</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #111;
+            --gold: #f0c040;
+            --gold-dark: #c49a20;
+            --red: #e74c3c;
+            --red-dark: #c0392b;
+            --green: #2ecc71;
+            --text: #fff;
+            --text-dim: #999;
+            --border: #222;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: radial-gradient(ellipse at center, #1a1a0a 0%, #000 70%);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: #0d0d0d;
+            border-bottom: 1px solid #222;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+        .logo i { color: #fff; font-style: normal; }
+        .marquee {
+            flex: 1;
+            min-width: 200px;
+            background: #111;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--gold);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee span { display: inline-block; animation: scroll 15s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .header-btns { display: flex; gap: 8px; }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .btn:hover { filter: brightness(1.15); }
+        .btn-login { background: var(--gold); color: #000; }
+        .btn-register { background: var(--red); color: #fff; }
+        .btn-deposit { background: #27ae60; color: #fff; }
+        .btn-logout { background: #333; color: #fff; }
+
+        /* ===== SUB HEADER ===== */
+        .sub-header {
+            background: #0d0d0d;
+            border-bottom: 1px solid #222;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+        .sub-header a { color: var(--text-dim); text-decoration: none; cursor: pointer; }
+        .sub-header a:hover, .sub-header a.active { color: var(--gold); }
+        .balance-box {
+            margin-left: auto;
+            background: #1a1a1a;
+            padding: 5px 14px;
+            border-radius: 4px;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main-wrapper {
+            display: flex;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 10px;
+            gap: 10px;
+        }
+        .game-area { flex: 1; min-width: 0; }
+        .side-panel { width: 300px; min-width: 280px; }
+
+        /* ===== DICE DISPLAY ===== */
+        .dice-section {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .dice-title {
+            font-size: 16px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .dice {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 900;
+            color: #000;
+            box-shadow: 0 0 20px rgba(240,192,64,0.3);
+            transition: transform 0.3s;
+        }
+        .dice.rolling { animation: shake 0.5s infinite; }
+        @keyframes shake {
+            0%,100% { transform: rotate(0); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+        .result-text {
+            font-size: 24px;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+        .result-tai { color: var(--red); }
+        .result-xiu { color: var(--green); }
+        .result-sum { font-size: 36px; color: var(--gold); }
+
+        /* ===== BETTING PANEL ===== */
+        .bet-panel {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        .bet-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .bet-option {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 20px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            position: relative;
+        }
+        .bet-option:hover { transform: scale(1.02); }
+        .bet-option.selected { border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .bet-tai { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .bet-xiu { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .bet-odd { color: var(--gold); }
+        .bet-label { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 4px; }
+        .amount-input-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .amount-input {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            outline: none;
+        }
+        .amount-input:focus { border-color: var(--gold); }
+        .btn-bet {
+            padding: 12px 30px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+        .btn-bet:hover { background: #f5d060; }
+        .btn-bet:disabled { opacity: 0.5; cursor: not-allowed; }
+        .quick-btns { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+        .quick-btn {
+            padding: 5px 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.2s;
+        }
+        .quick-btn:hover { background: #333; }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown-bar {
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .countdown-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.1s linear;
+        }
+        .timer-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+        .timer-seconds { color: var(--gold); font-weight: bold; font-size: 18px; }
+
+        /* ===== HISTORY ===== */
+        .history-section {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .history-title {
+            font-size: 14px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .history-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        .history-item {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 13px;
+            color: #fff;
+        }
+        .history-tai { background: var(--red); }
+        .history-xiu { background: var(--green); }
+
+        /* ===== CHAT BOX ===== */
+        .chat-box {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 8px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        .chat-msg { margin-bottom: 4px; }
+        .chat-msg strong { color: var(--gold); }
+        .chat-input-row {
+            display: flex;
+            border-top: 1px solid #222;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            background: #1a1a1a;
+            border: none;
+            color: #fff;
+            outline: none;
+            font-size: 12px;
+        }
+        .chat-send {
+            padding: 10px 15px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* ===== MODALS ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+        }
+        .modal h3 { color: var(--gold); margin-bottom: 15px; }
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+        .modal input:focus { border-color: var(--gold); }
+        .modal .btn { width: 100%; margin-top: 8px; padding: 12px; font-size: 14px; }
+        .modal .btn-close { background: #333; color: #fff; margin-top: 5px; }
+
+        @media (max-width: 768px) {
+            .main-wrapper { flex-direction: column; }
+            .side-panel { width: 100%; }
+            .dice { width: 60px; height: 60px; font-size: 28px; }
+            .bet-options { grid-template-columns: 1fr 1fr; }
+            .header { font-size: 12px; }
+            .logo { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div class="logo">🎲 XOC88.<span>CC</span></div>
+        <div class="marquee"><span>🏆 Chào mừng đến với XÓC ĐĨA ONLINE - Tỷ lệ thắng cao nhất - Nạp rút 30 giây - Hỗ trợ 24/7 🏆</span></div>
+        <div class="header-btns" id="headerBtns">
+            <button class="btn btn-login" onclick="openModal('loginModal')">ĐĂNG NHẬP</button>
+            <button class="btn btn-register" onclick="openModal('registerModal')">ĐĂNG KÝ</button>
+        </div>
+    </div>
+
+    <!-- ===== SUB HEADER ===== -->
+    <div class="sub-header">
+        <a class="active" onclick="changeTab(this)">🎲 TÀI XỈU</a>
+        <a onclick="changeTab(this)">🎰 XÓC ĐĨA</a>
+        <a onclick="changeTab(this)">🎮 BẦU CUA</a>
+        <a onclick="changeTab(this)">📜 LỊCH SỬ</a>
+        <a onclick="changeTab(this)">📞 HỖ TRỢ</a>
+        <div class="balance-box" id="balanceBox">💰 <span id="balanceDisplay">0</span> VNĐ</div>
+    </div>
+
+    <!-- ===== MAIN ===== -->
+    <div class="main-wrapper">
+        <!-- GAME AREA -->
+        <div class="game-area">
+            <!-- Dice -->
+            <div class="dice-section">
+                <div class="dice-title">🎲 XÓC ĐĨA TÀI XỈU</div>
+                <div class="dice-container">
+                    <div class="dice" id="dice1">⚀</div>
+                    <div class="dice" id="dice2">⚁</div>
+                    <div class="dice" id="dice3">⚂</div>
+                </div>
+                <div class="result-text" id="resultText">ĐANG CHỜ...</div>
+                <div class="result-sum" id="resultSum"></div>
+                <div class="timer-text">
+                    ⏱ Ván tiếp theo: <span class="timer-seconds" id="timerSeconds">30</span>s
+                </div>
+                <div class="countdown-bar"><div class="countdown-fill" id="countdownFill" style="width:100%"></div></div>
+            </div>
+
+            <!-- Bet Panel -->
+            <div class="bet-panel">
+                <div class="bet-options">
+                    <div class="bet-option bet-tai" id="betTai" onclick="selectBet('tai')">
+                        🔴 TÀI<br><span class="bet-label">(11-18)</span>
+                    </div>
+                    <div class="bet-option bet-xiu" id="betXiu" onclick="selectBet('xiu')">
+                        🟢 XỈU<br><span class="bet-label">(3-10)</span>
+                    </div>
+                </div>
+                <div class="amount-input-group">
+                    <input type="number" class="amount-input" id="betAmount" placeholder="Nhập số tiền cược" min="10000" step="10000" value="10000">
+                    <button class="btn-bet" id="btnPlaceBet" onclick="placeBet()">🎯 ĐẶT CƯỢC</button>
+                </div>
+                <div class="quick-btns">
+                    <button class="quick-btn" onclick="setAmount(10000)">10K</button>
+                    <button class="quick-btn" onclick="setAmount(50000)">50K</button>
+                    <button class="quick-btn" onclick="setAmount(100000)">100K</button>
+                    <button class="quick-btn" onclick="setAmount(500000)">500K</button>
+                    <button class="quick-btn" onclick="setAmount(1000000)">1M</button>
+                    <button class="quick-btn" onclick="setAmount('all')">ALL IN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDE PANEL -->
+        <div class="side-panel">
+            <!-- History -->
+            <div class="history-section">
+                <div class="history-title">📜 LỊCH SỬ KẾT QUẢ</div>
+                <div class="history-list" id="historyList"></div>
+            </div>
+            <!-- Chat -->
+            <div class="chat-box" style="margin-top:10px;">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-msg"><strong>Hệ thống:</strong> Chào mừng đến với XOC88.CC!</div>
+                </div>
+                <div class="chat-input-row">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Nhập tin nhắn..." onkeydown="if(event.key==='Enter')sendChat()">
+                    <button class="chat-send" onclick="sendChat()">GỬI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+    <!-- Login -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <h3>🔑 ĐĂNG NHẬP</h3>
+            <input type="text" id="loginUser" placeholder="Tên đăng nhập">
+            <input type="password" id="loginPass" placeholder="Mật khẩu">
+            <button class="btn btn-login" onclick="login()">ĐĂNG NHẬP</button>
+            <button class="btn btn-close" onclick="closeModal('loginModal')">ĐÓNG</button>
+        </div>
+    </div>
+
+    <!-- Register -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal">
+            <h3>📝 ĐĂNG KÝ TÀI KHOẢN</h3>
+            <input type="text" id="regUser" placeholder="Tên đăng nhập (4-20 ký tự)">
+            <input type="password" id="regPass" placeholder="Mật khẩu (6+ ký tự)">
+            <input type="password" id="regPass2" placeholder="Nhập lại mật khẩu">
+            <button class="btn btn-register" onclick="register()">TẠO TÀI KHOẢN</button>
+            <button class="btn btn-close" onclick="closeModal('registerModal')">ĐÓNG</button>
+        </div>
+    </div>
+
+    <!-- Nạp tiền -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal">
+            <h3>💰 NẠP TIỀN</h3>
+            <input type="number" id="depositAmount" placeholder="Số tiền nạp (tối thiểu 50K)">
+            <select id="depositMethod" style="width:100%;padding:12px;background:#0d0d0d;border:1px solid #333;color:#fff;border-radius:6px;margin-bottom:10px;">
+                <option value="bank">🏦 Chuyển khoản ngân hàng</option>
+                <option value="momo">📱 Ví Momo</option>
+                <option value="zalopay">💳 ZaloPay</option>
+                <option value="crypto">🪙 USDT (TRC20)</option>
+            </select>
+            <button class="btn btn-deposit" onclick="deposit()">XÁC NHẬN NẠP</button>
+            <button class="btn btn-close" onclick="closeModal('depositModal')">ĐÓNG</button>
+        </div>
+    </div>
+
+    <!-- Rút tiền -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal">
+            <h3>💸 RÚT TIỀN</h3>
+            <input type="number" id="withdrawAmount" placeholder="Số tiền rút">
+            <input type="text" id="withdrawBank" placeholder="Tên ngân hàng">
+            <input type="text" id="withdrawAccount" placeholder="Số tài khoản">
+            <input type="text" id="withdrawName" placeholder="Chủ tài khoản">
+            <button class="btn btn-withdraw" style="background:#e74c3c;color:#fff;" onclick="withdraw()">XÁC NHẬN RÚT</button>
+            <button class="btn btn-close" onclick="closeModal('withdrawModal')">ĐÓNG</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== STATE ====================
+        let currentUser = null;
+        let userBalance = 0;
+        let selectedBet = null; // 'tai' hoac 'xiu'
+        let currentDice = [1, 1, 1];
+        let gameRound = 0;
+        let timerSeconds = 30;
+        let timerInterval = null;
+        let betPlacedThisRound = false;
+        let gameHistory = [];
+        let isRolling = false;
+
+        const DICE_FACES = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        const DEFAULT_GUEST_BALANCE = 500000;
+
+        // ==================== INIT ====================
+        function init() {
+            loadUser();
+            updateUI();
+            startRound();
+            renderHistory();
+            setInterval(() => {
+                if (!isRolling && timerSeconds <= 0) rollDice();
+            }, 1000);
+        }
+
+        function loadUser() {
+            const saved = localStorage.getItem('xoc88_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                userBalance = currentUser.balance;
+            } else {
+                currentUser = null;
+                userBalance = DEFAULT_GUEST_BALANCE;
+            }
+            const savedHistory = localStorage.getItem('xoc88_history');
+            if (savedHistory) gameHistory = JSON.parse(savedHistory);
+        }
+
+        function saveUser() {
+            if (currentUser) {
+                currentUser.balance = userBalance;
+                localStorage.setItem('xoc88_user', JSON.stringify(currentUser));
+            }
+            localStorage.setItem('xoc88_history', JSON.stringify(gameHistory.slice(-50)));
+        }
+
+        function updateUI() {
+            // Balance
+            document.getElementById('balanceDisplay').textContent = userBalance.toLocaleString('vi-VN');
+
+            // Header buttons
+            const headerBtns = document.getElementById('headerBtns');
+            if (currentUser) {
+                headerBtns.innerHTML = `
+                    <span style="color:#fff;font-size:13px;">👤 ${currentUser.username}</span>
+                    <button class="btn btn-deposit" onclick="openModal('depositModal')">💰 NẠP</button>
+                    <button class="btn btn-withdraw" style="background:transparent;border:1px solid #e74c3c;color:#e74c3c;" onclick="openModal('withdrawModal')">💸 RÚT</button>
+                    <button class="btn btn-logout" onclick="logout()">🚪 THOÁT</button>
+                `;
+            } else {
+                headerBtns.innerHTML = `
+                    <button class="btn btn-login" onclick="openModal('loginModal')">ĐĂNG NHẬP</button>
+                    <button class="btn btn-register" onclick="openModal('registerModal')">ĐĂNG KÝ</button>
+                `;
+            }
+
+            // Dice display
+            document.getElementById('dice1').textContent = DICE_FACES[currentDice[0] - 1];
+            document.getElementById('dice2').textContent = DICE_FACES[currentDice[1] - 1];
+            document.getElementById('dice3').textContent = DICE_FACES[currentDice[2] - 1];
+        }
+
+        // ==================== GAME LOGIC ====================
+        function startRound() {
+            timerSeconds = 30;
+            betPlacedThisRound = false;
+            isRolling = false;
+            document.getElementById('btnPlaceBet').disabled = false;
+            document.getElementById('betTai').classList.remove('selected');
+            document.getElementById('betXiu').classList.remove('selected');
+            selectedBet = null;
+            updateTimerDisplay();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (!isRolling) {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                    if (timerSeconds <= 5) {
+                        document.getElementById('timerSeconds').style.color = '#e74c3c';
+                    }
+                    if (timerSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        rollDice();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timerSeconds').textContent = timerSeconds;
+            document.getElementById('timerSeconds').style.color = timerSeconds <= 5 ? '#e74c3c' : '#f0c040';
+            const pct = (timerSeconds / 30) * 100;
+            document.getElementById('countdownFill').style.width = pct + '%';
+            document.getElementById('countdownFill').style.background = timerSeconds <= 5 ? '#e74c3c' : '#f0c040';
+        }
+
+        function rollDice() {
+            if (isRolling) return;
+            isRolling = true;
+            document.getElementById('btnPlaceBet').disabled = true;
+
+            // Animation
+            const dice1 = document.getElementById('dice1');
+            const dice2 = document.getElementById('dice2');
+            const dice3 = document.getElementById('dice3');
+            dice1.classList.add('rolling');
+            dice2.classList.add('rolling');
+            dice3.classList.add('rolling');
+
+            let rollCount = 0;
+            const maxRolls = 10;
+            const rollInterval = setInterval(() => {
+                currentDice = [
+                    Math.floor(Math.random() * 6) + 1,
+                    Math.floor(Math.random() * 6) + 1,
+                    Math.floor(Math.random() * 6) + 1
+                ];
+                dice1.textContent = DICE_FACES[currentDice[0] - 1];
+                dice2.textContent = DICE_FACES[currentDice[1] - 1];
+                dice3.textContent = DICE_FACES[currentDice[2] - 1];
+                rollCount++;
+                if (rollCount >= maxRolls) {
+                    clearInterval(rollInterval);
+                    dice1.classList.remove('rolling');
+                    dice2.classList.remove('rolling');
+                    dice3.classList.remove('rolling');
+                    finalizeRoll();
+                }
+            }, 100);
+        }
+
+        function finalizeRoll() {
+            currentDice = [
+                Math.floor(Math.random() * 6) + 1,
+                Math.floor(Math.random() * 6) + 1,
+                Math.floor(Math.random() * 6) + 1
+            ];
+            updateUI();
+            const sum = currentDice[0] + currentDice[1] + currentDice[2];
+            const result = sum >= 11 ? 'tai' : 'xiu';
+            const resultText = document.getElementById('resultText');
+            const resultSum = document.getElementById('resultSum');
+
+            resultSum.textContent = 'TỔNG: ' + sum;
+            if (result === 'tai') {
+                resultText.textContent = '🔴 TÀI';
+                resultText.className = 'result-text result-tai';
+            } else {
+                resultText.textContent = '🟢 XỈU';
+                resultText.className = 'result-text result-xiu';
+            }
+
+            // Process bet
+            if (betPlacedThisRound && selectedBet && window._currentBetAmount) {
+                if (selectedBet === result) {
+                    const winAmount = window._currentBetAmount * 1.95;
+                    userBalance += Math.floor(winAmount);
+                    showToast('🎉 THẮNG! +' + Math.floor(winAmount).toLocaleString('vi-VN') + ' VNĐ', 'success');
+                } else {
+                    showToast('😢 THUA! -' + window._currentBetAmount.toLocaleString('vi-VN') + ' VNĐ', 'error');
+                }
+                window._currentBetAmount = null;
+                updateUI();
+                saveUser();
+            }
+
+            // Add to history
+            gameHistory.unshift({ sum, result, dice: [...currentDice], round: ++gameRound });
+            if (gameHistory.length > 50) gameHistory = gameHistory.slice(0, 50);
+            saveUser();
+            renderHistory();
+
+            // Add chat message
+            addSystemChat(`Kết quả: ${currentDice[0]}+${currentDice[1]}+${currentDice[2]}=${sum} → ${result.toUpperCase()}`);
+
+            // New round after delay
+            setTimeout(() => {
+                document.getElementById('resultText').textContent = 'ĐANG CHỜ...';
+                document.getElementById('resultSum').textContent = '';
+                startRound();
+            }, 3000);
+        }
+
+        function selectBet(type) {
+            if (isRolling) return;
+            selectedBet = type;
+            document.getElementById('betTai').classList.toggle('selected', type === 'tai');
+            document.getElementById('betXiu').classList.toggle('selected', type === 'xiu');
+        }
+
+        function setAmount(amount) {
+            const input = document.getElementById('betAmount');
+            if (amount === 'all') {
+                input.value = userBalance;
+            } else {
+                input.value = amount;
+            }
+        }
+
+        function placeBet() {
+            if (isRolling) { showToast('Đang xóc! Chờ ván mới.', 'error'); return; }
+            if (!selectedBet) { showToast('Vui lòng chọn TÀI hoặc XỈU!', 'error'); return; }
+            const amount = parseInt(document.getElementById('betAmount').value);
+            if (!amount || amount < 10000) { showToast('Tối thiểu 10,000 VNĐ!', 'error'); return; }
+            if (amount > userBalance) { showToast('Số dư không đủ! Vui lòng nạp thêm.', 'error'); return; }
+
+            userBalance -= amount;
+            window._currentBetAmount = amount;
+            betPlacedThisRound = true;
+            updateUI();
+            saveUser();
+            showToast('✅ Đặt ' + amount.toLocaleString('vi-VN') + ' VNĐ vào ' + selectedBet.toUpperCase(), 'info');
+            document.getElementById('btnPlaceBet').disabled = true;
+        }
+
+        // ==================== AUTH ====================
+        function login() {
+            const username = document.getElementById('loginUser').value.trim();
+            const password = document.getElementById('loginPass').value.trim();
+            if (!username || !password) { showToast('Vui lòng nhập đầy đủ!', 'error'); return; }
+            const users = JSON.parse(localStorage.getItem('xoc88_users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+            if (!user) { showToast('Sai tên đăng nhập hoặc mật khẩu!', 'error'); return; }
+            currentUser = user;
+            userBalance = user.balance;
+            saveUser();
+            updateUI();
+            closeModal('loginModal');
+            showToast('Đăng nhập thành công!', 'success');
+        }
+
+        function register() {
+            const username = document.getElementById('regUser').value.trim();
+            const password = document.getElementById('regPass').value;
+            const password2 = document.getElementById('regPass2').value;
+            if (!username || username.length < 4 || username.length > 20) { showToast('Tên đăng nhập 4-20 ký tự!', 'error'); return; }
+            if (!password || password.length < 6) { showToast('Mật khẩu tối thiểu 6 ký tự!', 'error'); return; }
+            if (password !== password2) { showToast('Mật khẩu không khớp!', 'error'); return; }
+            const users = JSON.parse(localStorage.getItem('xoc88_users') || '[]');
+            if (users.find(u => u.username === username)) { showToast('Tên đăng nhập đã tồn tại!', 'error'); return; }
+            const newUser = { username, password, balance: 100000, createdAt: new Date().toISOString() };
+            users.push(newUser);
+            localStorage.setItem('xoc88_users', JSON.stringify(users));
+            currentUser = newUser;
+            userBalance = newUser.balance;
+            saveUser();
+            updateUI();
+            closeModal('registerModal');
+            showToast('Đăng ký thành công! Tặng 100K 🎁', 'success');
+        }
+
+        function logout() {
+            if (confirm('Đăng xuất?')) {
+                currentUser = null;
+                userBalance = DEFAULT_GUEST_BALANCE;
+                localStorage.removeItem('xoc88_user');
+                updateUI();
+                showToast('Đã đăng xuất!', 'info');
+            }
+        }
+
+        function deposit() {
+            const amount = parseInt(document.getElementById('depositAmount').value);
+            if (!amount || amount < 50000) { showToast('Tối thiểu 50,000 VNĐ!', 'error'); return; }
+            setTimeout(() => {
+                userBalance += amount;
+                updateUI();
+                saveUser();
+                closeModal('depositModal');
+                showToast('Nạp thành công +' + amount.toLocaleString('vi-VN') + ' VNĐ!', 'success');
+            }, 600);
+        }
+
+        function withdraw() {
+            const amount = parseInt(document.getElementById('withdrawAmount').value);
+            const bank = document.getElementById('withdrawBank').value.trim();
+            const account = document.getElementById('withdrawAccount').value.trim();
+            const name = document.getElementById('withdrawName').value.trim();
+            if (!amount || amount < 50000) { showToast('Tối thiểu 50,000 VNĐ!', 'error'); return; }
+            if (amount > userBalance) { showToast('Số dư không đủ!', 'error'); return; }
+            if (!bank || !account || !name) { showToast('Vui lòng điền đầy đủ thông tin!', 'error'); return; }
+            userBalance -= amount;
+            updateUI();
+            saveUser();
+            closeModal('withdrawModal');
+            showToast('Rút thành công! Tiền sẽ về trong 5-15 phút.', 'success');
+        }
+
+        // ==================== HISTORY ====================
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            container.innerHTML = gameHistory.slice(0, 20).map(h => `
+                <div class="history-item ${h.result === 'tai' ? 'history-tai' : 'history-xiu'}" title="${h.dice.join('+')}=${h.sum}">
+                    ${h.sum}
+                </div>
+            `).join('');
+        }
+
+        // ==================== CHAT ====================
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const username = currentUser ? currentUser.username : 'Khách';
+            addChatMessage(username, msg);
+            input.value = '';
+        }
+
+        function addChatMessage(user, msg) {
+            const container = document.getElementById('chatMessages');
+            container.innerHTML += `<div class="chat-msg"><strong>${user}:</strong> ${msg}</div>`;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addSystemChat(msg) {
+            const container = document.getElementById('chatMessages');
+            container.innerHTML += `<div class="chat-msg"><strong style="color:#f0c040;">Hệ thống:</strong> ${msg}</div>`;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ==================== UTILS ====================
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            // Clear inputs
+            document.querySelectorAll('#' + id + ' input').forEach(inp => inp.value = '');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+        function changeTab(el) {
+            document.querySelectorAll('.sub-header a').forEach(a => a.classList.remove('active'));
+            el.classList.add('active');
+        }
+        function showToast(msg, type) {
+            const existing = document.querySelector('.toast-msg');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast-msg';
+            toast.style.cssText = `
+                position: fixed; top: 80px; right: 20px; z-index: 9999;
+                padding: 12px 24px; border-radius: 8px; color: #fff; font-weight: bold;
+                background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#f0c040'};
+                animation: slideIn 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            `;
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        // Modal overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+        });
+
+        // Init
+        init();
+    </script>
+</body>
+</html>
+```
