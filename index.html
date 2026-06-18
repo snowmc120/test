@@ -1,0 +1,1933 @@
+mod made by bao
+text
+
+████████████████████████████████████████████
+█                 PALOFSC                   █
+█   WEBSITE CÁ ĐỘ - ĐẦY ĐỦ ĐĂNG NHẬP & ĐĂNG KÝ █
+████████████████████████████████████████████
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BETKING - Cá Độ Thể Thao Trực Tuyến</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f2e;
+            --accent: #e94560;
+            --accent-hover: #c73e54;
+            --green: #00c853;
+            --gold: #ffd700;
+            --text: #e0e0e0;
+            --text-secondary: #999;
+            --border: #2a2f3e;
+            --input-bg: #141b28;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse at top, rgba(233,69,96,0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom right, rgba(0,200,83,0.05) 0%, transparent 60%);
+        }
+        /* ========== HEADER ========== */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--accent);
+            padding: 0 30px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .balance-display {
+            background: #0f1a2e;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+        .balance-amount {
+            color: var(--green);
+            font-size: 16px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+        }
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-deposit {
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: #000;
+            border: none;
+        }
+        .btn-deposit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,200,83,0.4);
+        }
+        .btn-withdraw {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-withdraw:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233,69,96,0.4);
+        }
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+        .btn-logout:hover {
+            background: #ff4444;
+            color: #fff;
+        }
+        .btn-login-header {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 13px;
+            padding: 8px 16px;
+            animation: glowBtn 2s infinite alternate;
+        }
+        @keyframes glowBtn {
+            from { box-shadow: 0 0 5px rgba(233,69,96,0.3); }
+            to { box-shadow: 0 0 20px rgba(233,69,96,0.7); }
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        /* ========== GUEST MODE BANNER ========== */
+        .guest-banner {
+            background: linear-gradient(90deg, #ff8c00, #ff4500);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .guest-banner .btn {
+            background: #fff;
+            color: #ff4500;
+            border: none;
+            font-size: 12px;
+            padding: 6px 15px;
+        }
+        /* ========== MAIN LAYOUT ========== */
+        .main-wrapper {
+            display: flex;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            border: 1px solid var(--border);
+        }
+        .sidebar-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin: 15px 0 10px 10px;
+        }
+        .sport-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .sport-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            user-select: none;
+            -webkit-user-select: none;
+            position: relative;
+            z-index: 1;
+        }
+        .sport-item:hover {
+            background: rgba(233,69,96,0.1);
+        }
+        .sport-item.active {
+            background: var(--accent);
+            color: #fff;
+            font-weight: 700;
+        }
+        .sport-icon {
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
+        .live-badge {
+            background: #ff0000;
+            color: #fff;
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        /* ========== CONTENT ========== */
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        /* ========== MATCH CARD ========== */
+        .match-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .match-card:hover {
+            border-color: var(--accent);
+            transform: translateX(3px);
+            box-shadow: 0 5px 20px rgba(233,69,96,0.15);
+        }
+        .match-card.live {
+            border-left: 3px solid #ff0000;
+        }
+        .match-league {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .match-minute {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .team-block {
+            flex: 1;
+            text-align: center;
+        }
+        .team-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+        .team-score {
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+            padding: 0 20px;
+        }
+        .team-score.vs {
+            color: var(--text-secondary);
+            font-size: 20px;
+        }
+        .odds-row {
+            display: flex;
+            gap: 10px;
+        }
+        .odd-box {
+            flex: 1;
+            background: #141b28;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 1;
+        }
+        .odd-box:hover {
+            background: rgba(233,69,96,0.2);
+            border-color: var(--accent);
+            transform: scale(1.03);
+        }
+        .odd-box.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(233,69,96,0.5);
+        }
+        .odd-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            pointer-events: none;
+        }
+        .odd-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--green);
+            pointer-events: none;
+        }
+        .odd-box.selected .odd-value {
+            color: #fff;
+        }
+        /* ========== BETSLIP ========== */
+        .betslip {
+            width: 320px;
+            min-width: 320px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            border: 1px solid var(--border);
+        }
+        .betslip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        .betslip-count {
+            background: var(--accent);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .bet-selection {
+            background: #141b28;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bet-selection-info { flex: 1; }
+        .bet-selection-match { font-size: 12px; color: var(--text-secondary); }
+        .bet-selection-pick { font-weight: 600; font-size: 14px; }
+        .bet-selection-odds { color: var(--green); font-weight: 700; font-size: 16px; }
+        .bet-remove {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 8px;
+            z-index: 2;
+            position: relative;
+        }
+        .bet-remove:hover { color: #ff0000; transform: scale(1.2); }
+        .bet-input-group { margin: 15px 0; }
+        .bet-input-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        .bet-input {
+            width: 100%;
+            padding: 12px;
+            background: #141b28;
+            border: 1px solid var(--border);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .bet-input:focus { border-color: var(--accent); }
+        .quick-amounts {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .quick-amount {
+            padding: 6px 12px;
+            background: #141b28;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            color: var(--text);
+            user-select: none;
+            -webkit-user-select: none;
+            position: relative;
+            z-index: 1;
+        }
+        .quick-amount:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        .bet-summary {
+            background: #141b28;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .potential-win { color: var(--green); font-size: 18px; }
+        .btn-place-bet {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            z-index: 1;
+            position: relative;
+        }
+        .btn-place-bet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233,69,96,0.5);
+        }
+        .btn-place-bet:disabled {
+            background: #333;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+        .btn-clear {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            z-index: 1;
+            position: relative;
+        }
+        .btn-clear:hover { background: rgba(255,255,255,0.05); }
+        /* ========== AUTH MODALS ========== */
+        .auth-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+        }
+        .auth-overlay.active {
+            display: flex;
+        }
+        .auth-container {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            overflow: hidden;
+            position: relative;
+        }
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            z-index: 1;
+        }
+        .auth-tab.active {
+            color: #fff;
+            border-bottom-color: var(--accent);
+            background: rgba(233,69,96,0.05);
+        }
+        .auth-tab:hover { color: #fff; }
+        .auth-form {
+            padding: 30px;
+            display: none;
+        }
+        .auth-form.active { display: block; }
+        .auth-form h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 22px;
+            color: #fff;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group .input-icon-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .form-group .input-icon {
+            position: absolute;
+            left: 12px;
+            font-size: 18px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .form-input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(233,69,96,0.15);
+        }
+        .form-input::placeholder { color: #555; }
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 2;
+            padding: 5px;
+        }
+        .password-toggle:hover { color: #fff; }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 10px;
+            z-index: 1;
+            position: relative;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233,69,96,0.5);
+        }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .auth-footer span {
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .auth-footer span:hover { text-decoration: underline; }
+        .auth-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .auth-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .error-msg {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        .error-msg.show { display: block; }
+        .success-msg {
+            color: var(--green);
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        .success-msg.show { display: block; }
+        /* ========== MODALS ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            z-index: 10001;
+        }
+        .modal-icon { font-size: 60px; margin-bottom: 20px; }
+        .modal h3 { font-size: 22px; margin-bottom: 10px; }
+        .modal p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            background: #141b28;
+            border: 1px solid var(--border);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        .modal-input:focus { border-color: var(--accent); }
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .payment-method {
+            padding: 15px;
+            background: #141b28;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-user-select: none;
+            position: relative;
+            z-index: 1;
+        }
+        .payment-method:hover { border-color: var(--accent); }
+        .payment-method.selected {
+            border-color: var(--accent);
+            background: rgba(233,69,96,0.1);
+        }
+        .btn-modal {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s;
+            z-index: 1;
+            position: relative;
+        }
+        .btn-confirm { background: var(--accent); color: #fff; }
+        .btn-confirm:hover { background: var(--accent-hover); }
+        .btn-cancel {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .btn-cancel:hover { background: rgba(255,255,255,0.05); }
+        /* ========== TOAST ========== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            animation: slideInRight 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            min-width: 250px;
+        }
+        .toast-success { background: #00c853; }
+        .toast-error { background: #ff1744; }
+        .toast-info { background: #2196f3; }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1200px) {
+            .main-wrapper { flex-wrap: wrap; }
+            .betslip { width: 100%; min-width: 100%; position: static; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .header { padding: 0 10px; }
+            .logo { font-size: 18px; }
+            .header-right { gap: 8px; }
+            .btn { padding: 6px 10px; font-size: 11px; }
+            .balance-display { padding: 6px 10px; font-size: 12px; }
+            .balance-amount { font-size: 13px; }
+            .team-score { font-size: 24px; }
+            .odds-row { flex-direction: column; }
+            .guest-banner { font-size: 12px; padding: 8px; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== AUTH OVERLAY ==================== -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-container">
+            <button class="auth-close" id="authClose" type="button">✕</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" type="button">🔑 ĐĂNG NHẬP</button>
+                <button class="auth-tab" data-tab="register" type="button">📝 TẠO TÀI KHOẢN</button>
+            </div>
+
+            <!-- FORM ĐĂNG NHẬP -->
+            <div class="auth-form active" id="formLogin">
+                <h3>🔐 Chào mừng trở lại!</h3>
+                <div class="form-group">
+                    <label>Tên đăng nhập hoặc Email</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-input" id="loginUsername" placeholder="Nhập tên đăng nhập hoặc email" autocomplete="username">
+                    </div>
+                    <div class="error-msg" id="loginUsernameError">Vui lòng nhập tên đăng nhập</div>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" class="form-input" id="loginPassword" placeholder="Nhập mật khẩu" autocomplete="current-password">
+                        <button class="password-toggle" data-target="loginPassword" type="button">👁️</button>
+                    </div>
+                    <div class="error-msg" id="loginPasswordError">Vui lòng nhập mật khẩu</div>
+                </div>
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <span style="color: var(--accent); cursor: pointer; font-size: 13px;" onclick="showToast('Tính năng đang phát triển', 'info')">Quên mật khẩu?</span>
+                </div>
+                <button class="btn-submit" id="btnLogin" type="button">🚀 ĐĂNG NHẬP</button>
+                <div class="success-msg" id="loginSuccess"></div>
+                <div class="auth-footer">
+                    Chưa có tài khoản? <span data-switch="register">Đăng ký ngay</span>
+                </div>
+            </div>
+
+            <!-- FORM ĐĂNG KÝ -->
+            <div class="auth-form" id="formRegister">
+                <h3>✨ Tạo tài khoản mới</h3>
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-input" id="regUsername" placeholder="Chọn tên đăng nhập (4-20 ký tự)" autocomplete="off">
+                    </div>
+                    <div class="error-msg" id="regUsernameError">Tên đăng nhập phải từ 4-20 ký tự</div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input type="email" class="form-input" id="regEmail" placeholder="Nhập địa chỉ email" autocomplete="off">
+                    </div>
+                    <div class="error-msg" id="regEmailError">Email không hợp lệ</div>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">📱</span>
+                        <input type="tel" class="form-input" id="regPhone" placeholder="Nhập số điện thoại" autocomplete="off">
+                    </div>
+                    <div class="error-msg" id="regPhoneError">Số điện thoại không hợp lệ (10-11 số)</div>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" class="form-input" id="regPassword" placeholder="Tạo mật khẩu (tối thiểu 6 ký tự)" autocomplete="new-password">
+                        <button class="password-toggle" data-target="regPassword" type="button">👁️</button>
+                    </div>
+                    <div class="error-msg" id="regPasswordError">Mật khẩu phải từ 6 ký tự trở lên</div>
+                </div>
+                <div class="form-group">
+                    <label>Nhập lại mật khẩu</label>
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" class="form-input" id="regConfirmPassword" placeholder="Nhập lại mật khẩu" autocomplete="new-password">
+                        <button class="password-toggle" data-target="regConfirmPassword" type="button">👁️</button>
+                    </div>
+                    <div class="error-msg" id="regConfirmPasswordError">Mật khẩu không khớp</div>
+                </div>
+                <button class="btn-submit" id="btnRegister" type="button">✅ TẠO TÀI KHOẢN</button>
+                <div class="success-msg" id="registerSuccess"></div>
+                <div class="auth-footer">
+                    Đã có tài khoản? <span data-switch="login">Đăng nhập</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GUEST BANNER ==================== -->
+    <div class="guest-banner" id="guestBanner">
+        ⚠️ Bạn đang ở chế độ khách. <button class="btn" onclick="openAuthOverlay()">🔑 ĐĂNG NHẬP NGAY</button> để nhận 100K miễn phí!
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <div class="logo" onclick="location.reload()">⚡ BETKING</div>
+        <div class="header-right" id="headerRight">
+            <!-- Sẽ được render bằng JS dựa trên trạng thái đăng nhập -->
+        </div>
+    </header>
+
+    <!-- ==================== MAIN ==================== -->
+    <div class="main-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebarPanel">
+            <div class="sidebar-title">Thể thao</div>
+            <div class="sport-nav" id="sportNav">
+                <div class="sport-item active" data-filter="all">
+                    <span class="sport-icon">🏟️</span> Tất cả
+                    <span class="live-badge">LIVE</span>
+                </div>
+                <div class="sport-item" data-filter="bongda">
+                    <span class="sport-icon">⚽</span> Bóng đá
+                </div>
+                <div class="sport-item" data-filter="bongro">
+                    <span class="sport-icon">🏀</span> Bóng rổ
+                </div>
+                <div class="sport-item" data-filter="tennis">
+                    <span class="sport-icon">🎾</span> Tennis
+                </div>
+                <div class="sport-item" data-filter="esport">
+                    <span class="sport-icon">🎮</span> E-Sports
+                </div>
+            </div>
+            <div class="sidebar-title">Tiện ích</div>
+            <div class="sport-nav">
+                <div class="sport-item" id="btnHistory">
+                    <span class="sport-icon">📋</span> Lịch sử cược
+                </div>
+                <div class="sport-item" id="btnRules">
+                    <span class="sport-icon">📖</span> Luật chơi
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="content">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="live-dot"></span> Trận đấu đang diễn ra & sắp tới
+                </div>
+                <span style="color: var(--text-secondary);" id="matchCount">8 trận</span>
+            </div>
+            <div id="matchesContainer"></div>
+        </main>
+
+        <!-- BETSLIP -->
+        <aside class="betslip" id="betslipPanel">
+            <div class="betslip-header">
+                <strong>📋 Phiếu cược</strong>
+                <span class="betslip-count" id="betCount">0</span>
+            </div>
+            <div id="betSlipSelections">
+                <p style="text-align:center; color: var(--text-secondary); padding: 30px 0;">
+                    Chọn một trận đấu và nhấp vào tỷ lệ cược để bắt đầu
+                </p>
+            </div>
+            <div id="betSlipFooter" style="display:none;">
+                <div class="bet-summary">
+                    <div class="summary-row">
+                        <span>Tổng tỷ lệ</span>
+                        <span style="color: var(--green); font-weight: 700;" id="totalOddsDisplay">0.00</span>
+                    </div>
+                </div>
+                <div class="bet-input-group">
+                    <label for="betAmount">Số tiền cược (VNĐ)</label>
+                    <input type="number" class="bet-input" id="betAmount" placeholder="Tối thiểu 10,000 VNĐ" min="10000" step="10000" value="">
+                    <div class="quick-amounts" id="quickAmounts">
+                        <span class="quick-amount" data-amount="50000">50K</span>
+                        <span class="quick-amount" data-amount="100000">100K</span>
+                        <span class="quick-amount" data-amount="500000">500K</span>
+                        <span class="quick-amount" data-amount="1000000">1M</span>
+                        <span class="quick-amount" data-amount="5000000">5M</span>
+                        <span class="quick-amount" data-amount="all">ALL IN</span>
+                    </div>
+                </div>
+                <div class="bet-summary">
+                    <div class="summary-row">
+                        <span>Thắng tiềm năng</span>
+                        <span class="potential-win" id="potentialWin">0 VNĐ</span>
+                    </div>
+                </div>
+                <button class="btn btn-place-bet" id="placeBetBtn" type="button">
+                    🎯 ĐẶT CƯỢC NGAY
+                </button>
+                <button class="btn btn-clear" id="btnClearSlip" type="button">
+                    🗑️ Xóa tất cả lựa chọn
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==================== MODALS ==================== -->
+    <!-- Nạp tiền -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal">
+            <div class="modal-icon">💰</div>
+            <h3>Nạp tiền vào tài khoản</h3>
+            <p>Chọn phương thức và nhập số tiền</p>
+            <input type="number" class="modal-input" id="depositAmountInput" placeholder="Số tiền (tối thiểu 50,000 VNĐ)" min="50000" step="50000" value="">
+            <div class="payment-methods" id="paymentMethods">
+                <div class="payment-method selected" data-method="bank">🏦 Ngân hàng</div>
+                <div class="payment-method" data-method="momo">📱 Momo</div>
+                <div class="payment-method" data-method="zalopay">💳 ZaloPay</div>
+                <div class="payment-method" data-method="crypto">🪙 USDT</div>
+            </div>
+            <button class="btn-modal btn-confirm" id="btnConfirmDeposit" type="button">Xác nhận nạp tiền</button>
+            <button class="btn-modal btn-cancel" id="btnCancelDeposit" type="button">Hủy</button>
+        </div>
+    </div>
+
+    <!-- Rút tiền -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal">
+            <div class="modal-icon">💸</div>
+            <h3>Rút tiền</h3>
+            <p>Số dư hiện tại: <strong id="withdrawBalance" style="color: var(--green);">0 VNĐ</strong></p>
+            <input type="number" class="modal-input" id="withdrawAmountInput" placeholder="Số tiền muốn rút" min="50000" step="50000" value="">
+            <input type="text" class="modal-input" id="withdrawAccount" placeholder="Số tài khoản / Ví nhận" value="">
+            <input type="text" class="modal-input" id="withdrawBank" placeholder="Tên ngân hàng" value="">
+            <input type="text" class="modal-input" id="withdrawName" placeholder="Tên chủ tài khoản" value="">
+            <button class="btn-modal btn-confirm" id="btnConfirmWithdraw" type="button">Xác nhận rút tiền</button>
+            <button class="btn-modal btn-cancel" id="btnCancelWithdraw" type="button">Hủy</button>
+        </div>
+    </div>
+
+    <!-- Thành công -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">🎉</div>
+            <h3 id="successTitle">Thành công!</h3>
+            <p id="successMessage"></p>
+            <button class="btn-modal btn-confirm" id="btnCloseSuccess" type="button">OK</button>
+        </div>
+    </div>
+
+    <!-- Lịch sử cược -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-icon">📋</div>
+            <h3>Lịch sử cược</h3>
+            <div id="historyContent" style="text-align: left;"></div>
+            <button class="btn-modal btn-cancel" id="btnCloseHistory" type="button">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DATABASE ====================
+        const matchesDB = [
+            { id: 1, league: "🏴 Ngoại Hạng Anh", time: "2024-12-15 22:00", status: "live", minute: 67, sport: "bongda", home: "Arsenal", away: "Chelsea", homeScore: 2, awayScore: 1, odds: { home: 1.95, draw: 3.40, away: 3.80 } },
+            { id: 2, league: "🇪🇸 La Liga", time: "2024-12-16 03:00", status: "live", minute: 34, sport: "bongda", home: "Barcelona", away: "Atletico Madrid", homeScore: 1, awayScore: 1, odds: { home: 2.10, draw: 3.20, away: 3.50 } },
+            { id: 3, league: "🇮🇹 Serie A", time: "2024-12-15 23:30", status: "upcoming", minute: null, sport: "bongda", home: "Juventus", away: "AC Milan", homeScore: null, awayScore: null, odds: { home: 2.25, draw: 3.00, away: 3.30 } },
+            { id: 4, league: "🇩🇪 Bundesliga", time: "2024-12-16 00:30", status: "upcoming", minute: null, sport: "bongda", home: "Bayern Munich", away: "Dortmund", homeScore: null, awayScore: null, odds: { home: 1.65, draw: 4.00, away: 4.50 } },
+            { id: 5, league: "🏀 NBA", time: "2024-12-15 10:30", status: "live", minute: "Q3 5:23", sport: "bongro", home: "LA Lakers", away: "Warriors", homeScore: 78, awayScore: 82, odds: { home: 2.40, away: 1.60 } },
+            { id: 6, league: "🏀 NBA", time: "2024-12-15 13:00", status: "upcoming", minute: null, sport: "bongro", home: "Celtics", away: "Bucks", homeScore: null, awayScore: null, odds: { home: 1.85, away: 1.95 } },
+            { id: 7, league: "🎾 ATP Finals", time: "2024-12-16 20:00", status: "upcoming", minute: null, sport: "tennis", home: "N. Djokovic", away: "C. Alcaraz", homeScore: null, awayScore: null, odds: { home: 1.90, away: 1.90 } },
+            { id: 8, league: "🎮 LOL Worlds", time: "2024-12-16 18:00", status: "upcoming", minute: null, sport: "esport", home: "T1", away: "JDG", homeScore: null, awayScore: null, odds: { home: 1.75, away: 2.10 } }
+        ];
+
+        // ==================== STATE ====================
+        let currentUser = null; // { username, email, phone, balance, avatarLetter }
+        let userBalance = 0;
+        let betSlip = [];
+        let currentSportFilter = 'all';
+        let selectedPaymentMethod = 'bank';
+        let matchUpdateInterval;
+        const DEFAULT_GUEST_BALANCE = 500000; // 500K cho khách
+
+        // ==================== DOM REFERENCES ====================
+        function getDom(id) { return document.getElementById(id); }
+
+        // ==================== INIT ====================
+        function init() {
+            loadAllFromStorage();
+            renderHeader();
+            renderGuestBanner();
+            renderMatches();
+            updateBetSlipUI();
+            attachAllEventListeners();
+            attachAuthEventListeners();
+            if (matchUpdateInterval) clearInterval(matchUpdateInterval);
+            matchUpdateInterval = setInterval(updateLiveMatches, 5000);
+            console.log('🔥 BETKING - HỆ THỐNG ĐÃ SẴN SÀNG!');
+            console.log('👤 Người dùng:', currentUser ? currentUser.username : 'Khách');
+            console.log('💰 Số dư:', userBalance.toLocaleString('vi-VN'), 'VNĐ');
+        }
+
+        function loadAllFromStorage() {
+            try {
+                const savedUser = localStorage.getItem('betking_currentUser');
+                if (savedUser) {
+                    currentUser = JSON.parse(savedUser);
+                    userBalance = currentUser.balance;
+                } else {
+                    currentUser = null;
+                    userBalance = DEFAULT_GUEST_BALANCE;
+                }
+                const savedSlip = localStorage.getItem('betking_slip');
+                if (savedSlip) {
+                    betSlip = JSON.parse(savedSlip);
+                    if (!Array.isArray(betSlip)) betSlip = [];
+                }
+            } catch (e) {
+                currentUser = null;
+                userBalance = DEFAULT_GUEST_BALANCE;
+                betSlip = [];
+            }
+        }
+
+        function saveCurrentUser() {
+            try {
+                if (currentUser) {
+                    currentUser.balance = userBalance;
+                    localStorage.setItem('betking_currentUser', JSON.stringify(currentUser));
+                    // Cập nhật vào database users
+                    const users = JSON.parse(localStorage.getItem('betking_users') || '[]');
+                    const idx = users.findIndex(u => u.username === currentUser.username);
+                    if (idx >= 0) {
+                        users[idx].balance = userBalance;
+                    }
+                    localStorage.setItem('betking_users', JSON.stringify(users));
+                }
+                localStorage.setItem('betking_slip', JSON.stringify(betSlip));
+            } catch (e) {
+                console.warn('Không thể lưu:', e);
+            }
+        }
+
+        // ==================== RENDER HEADER ====================
+        function renderHeader() {
+            const headerRight = getDom('headerRight');
+            if (!headerRight) return;
+            if (currentUser) {
+                headerRight.innerHTML = `
+                    <div class="balance-display">
+                        💰 <span>VNĐ</span>
+                        <span class="balance-amount" id="balanceDisplay">${userBalance.toLocaleString('vi-VN')}</span>
+                    </div>
+                    <button class="btn btn-deposit" id="btnDeposit" type="button">➕ Nạp tiền</button>
+                    <button class="btn btn-withdraw" id="btnWithdraw" type="button">💸 Rút tiền</button>
+                    <div class="user-avatar" id="userAvatar" title="${currentUser.username}">${currentUser.avatarLetter}</div>
+                    <button class="btn btn-logout" id="btnLogout" type="button">🚪 Thoát</button>
+                `;
+            } else {
+                headerRight.innerHTML = `
+                    <button class="btn btn-login-header" id="btnOpenAuth" type="button">🔑 ĐĂNG NHẬP / ĐĂNG KÝ</button>
+                `;
+            }
+            // Gán lại sự kiện cho header buttons
+            attachHeaderEvents();
+            // Cập nhật withdraw balance
+            const wb = getDom('withdrawBalance');
+            if (wb) wb.textContent = userBalance.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        function renderGuestBanner() {
+            const banner = getDom('guestBanner');
+            if (!banner) return;
+            if (currentUser) {
+                banner.style.display = 'none';
+            } else {
+                banner.style.display = 'flex';
+            }
+        }
+
+        function attachHeaderEvents() {
+            const btnDeposit = getDom('btnDeposit');
+            const btnWithdraw = getDom('btnWithdraw');
+            const btnLogout = getDom('btnLogout');
+            const btnOpenAuth = getDom('btnOpenAuth');
+
+            if (btnDeposit) btnDeposit.onclick = openDepositModal;
+            if (btnWithdraw) btnWithdraw.onclick = openWithdrawModal;
+            if (btnLogout) btnLogout.onclick = logout;
+            if (btnOpenAuth) btnOpenAuth.onclick = openAuthOverlay;
+        }
+
+        // ==================== AUTH LOGIC ====================
+        function openAuthOverlay() {
+            const overlay = getDom('authOverlay');
+            if (overlay) {
+                overlay.classList.add('active');
+                // Reset về tab login
+                switchAuthTab('login');
+                clearAllAuthErrors();
+                clearAllAuthInputs();
+            }
+        }
+
+        function closeAuthOverlay() {
+            const overlay = getDom('authOverlay');
+            if (overlay) overlay.classList.remove('active');
+            clearAllAuthErrors();
+            clearAllAuthInputs();
+        }
+
+        function switchAuthTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            const targetTab = document.querySelector(`.auth-tab[data-tab="${tab}"]`);
+            const targetForm = getDom(tab === 'login' ? 'formLogin' : 'formRegister');
+            if (targetTab) targetTab.classList.add('active');
+            if (targetForm) targetForm.classList.add('active');
+            clearAllAuthErrors();
+            clearAllAuthInputs();
+        }
+
+        function clearAllAuthErrors() {
+            document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.success-msg').forEach(el => { el.classList.remove('show'); el.textContent = ''; });
+        }
+
+        function clearAllAuthInputs() {
+            document.querySelectorAll('.auth-form .form-input').forEach(inp => inp.value = '');
+        }
+
+        function showAuthError(id, message) {
+            const el = getDom(id);
+            if (el) { el.textContent = message; el.classList.add('show'); }
+        }
+
+        function hideAuthError(id) {
+            const el = getDom(id);
+            if (el) el.classList.remove('show');
+        }
+
+        function login() {
+            clearAllAuthErrors();
+            const username = getDom('loginUsername').value.trim();
+            const password = getDom('loginPassword').value.trim();
+            let valid = true;
+
+            if (!username) { showAuthError('loginUsernameError', 'Vui lòng nhập tên đăng nhập hoặc email'); valid = false; }
+            if (!password) { showAuthError('loginPasswordError', 'Vui lòng nhập mật khẩu'); valid = false; }
+            if (!valid) return;
+
+            // Tìm user trong database
+            const users = JSON.parse(localStorage.getItem('betking_users') || '[]');
+            const user = users.find(u =>
+                (u.username.toLowerCase() === username.toLowerCase() || u.email.toLowerCase() === username.toLowerCase()) &&
+                u.password === password
+            );
+
+            if (!user) {
+                showAuthError('loginPasswordError', 'Tên đăng nhập hoặc mật khẩu không đúng!');
+                showToast('Đăng nhập thất bại! Kiểm tra lại thông tin.', 'error');
+                return;
+            }
+
+            // Đăng nhập thành công
+            currentUser = {
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+                balance: user.balance,
+                avatarLetter: user.username.charAt(0).toUpperCase()
+            };
+            userBalance = user.balance;
+            saveCurrentUser();
+            renderHeader();
+            renderGuestBanner();
+            updateBetSlipUI();
+            closeAuthOverlay();
+            showToast('Đăng nhập thành công! Chào mừng ' + user.username + ' 🎉', 'success');
+            document.getElementById('successTitle').textContent = '✅ Đăng nhập thành công!';
+            document.getElementById('successMessage').innerHTML = `
+                <p>Chào mừng <strong>${user.username}</strong> trở lại!</p>
+                <p>Số dư: <strong style="color: var(--green);">${userBalance.toLocaleString('vi-VN')} VNĐ</strong></p>
+            `;
+            openModal('successModal');
+        }
+
+        function register() {
+            clearAllAuthErrors();
+            const username = getDom('regUsername').value.trim();
+            const email = getDom('regEmail').value.trim();
+            const phone = getDom('regPhone').value.trim();
+            const password = getDom('regPassword').value;
+            const confirmPassword = getDom('regConfirmPassword').value;
+            let valid = true;
+
+            if (!username || username.length < 4 || username.length > 20) {
+                showAuthError('regUsernameError', 'Tên đăng nhập phải từ 4-20 ký tự'); valid = false;
+            }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showAuthError('regEmailError', 'Email không hợp lệ'); valid = false;
+            }
+            if (!phone || !/^0\d{9,10}$/.test(phone)) {
+                showAuthError('regPhoneError', 'Số điện thoại không hợp lệ (10-11 số, bắt đầu 0)'); valid = false;
+            }
+            if (!password || password.length < 6) {
+                showAuthError('regPasswordError', 'Mật khẩu phải từ 6 ký tự trở lên'); valid = false;
+            }
+            if (password !== confirmPassword) {
+                showAuthError('regConfirmPasswordError', 'Mật khẩu không khớp'); valid = false;
+            }
+
+            // Kiểm tra trùng
+            const users = JSON.parse(localStorage.getItem('betking_users') || '[]');
+            if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+                showAuthError('regUsernameError', 'Tên đăng nhập đã tồn tại!'); valid = false;
+            }
+            if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                showAuthError('regEmailError', 'Email đã được sử dụng!'); valid = false;
+            }
+            if (users.find(u => u.phone === phone)) {
+                showAuthError('regPhoneError', 'Số điện thoại đã được sử dụng!'); valid = false;
+            }
+
+            if (!valid) return;
+
+            // Tạo user mới
+            const newUser = {
+                username: username,
+                email: email,
+                phone: phone,
+                password: password,
+                balance: 100000, // 100K miễn phí cho user mới
+                createdAt: new Date().toISOString()
+            };
+            users.push(newUser);
+            localStorage.setItem('betking_users', JSON.stringify(users));
+
+            // Tự động đăng nhập
+            currentUser = {
+                username: newUser.username,
+                email: newUser.email,
+                phone: newUser.phone,
+                balance: newUser.balance,
+                avatarLetter: newUser.username.charAt(0).toUpperCase()
+            };
+            userBalance = newUser.balance;
+            saveCurrentUser();
+            renderHeader();
+            renderGuestBanner();
+            updateBetSlipUI();
+            closeAuthOverlay();
+            showToast('Đăng ký thành công! Nhận ngay 100K miễn phí 🎁', 'success');
+            document.getElementById('successTitle').textContent = '🎉 Đăng ký thành công!';
+            document.getElementById('successMessage').innerHTML = `
+                <p>Chào mừng <strong>${username}</strong>!</p>
+                <p>Bạn được tặng <strong style="color: var(--green);">100,000 VNĐ</strong></p>
+                <p>Số dư: <strong style="color: var(--green);">${userBalance.toLocaleString('vi-VN')} VNĐ</strong></p>
+            `;
+            openModal('successModal');
+        }
+
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất? Dữ liệu phiếu cược sẽ bị xóa.')) {
+                currentUser = null;
+                userBalance = DEFAULT_GUEST_BALANCE;
+                betSlip = [];
+                saveCurrentUser();
+                localStorage.removeItem('betking_currentUser');
+                localStorage.removeItem('betking_slip');
+                renderHeader();
+                renderGuestBanner();
+                renderMatches();
+                updateBetSlipUI();
+                showToast('Đã đăng xuất! Bạn đang ở chế độ khách.', 'info');
+            }
+        }
+
+        function attachAuthEventListeners() {
+            // Auth overlay close
+            const authClose = getDom('authClose');
+            const authOverlay = getDom('authOverlay');
+            if (authClose) authClose.onclick = closeAuthOverlay;
+            if (authOverlay) {
+                authOverlay.onclick = function(e) {
+                    if (e.target === authOverlay) closeAuthOverlay();
+                };
+            }
+
+            // Tab switching
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.onclick = function() {
+                    const tabName = this.getAttribute('data-tab');
+                    switchAuthTab(tabName);
+                };
+            });
+
+            // Switch links in footer
+            document.querySelectorAll('.auth-footer span[data-switch]').forEach(span => {
+                span.onclick = function() {
+                    const tab = this.getAttribute('data-switch');
+                    switchAuthTab(tab);
+                };
+            });
+
+            // Password toggle
+            document.querySelectorAll('.password-toggle').forEach(btn => {
+                btn.onclick = function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = getDom(targetId);
+                    if (input) {
+                        input.type = input.type === 'password' ? 'text' : 'password';
+                        this.textContent = input.type === 'password' ? '👁️' : '🙈';
+                    }
+                };
+            });
+
+            // Submit buttons
+            const btnLogin = getDom('btnLogin');
+            const btnRegister = getDom('btnRegister');
+            if (btnLogin) btnLogin.onclick = login;
+            if (btnRegister) btnRegister.onclick = register;
+
+            // Enter key for forms
+            document.querySelectorAll('.auth-form .form-input').forEach(input => {
+                input.onkeydown = function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (this.closest('#formLogin')) login();
+                        else if (this.closest('#formRegister')) register();
+                    }
+                };
+            });
+        }
+
+        // ==================== ALL EVENT LISTENERS ====================
+        function attachAllEventListeners() {
+            attachHeaderEvents();
+
+            // Sport navigation
+            document.querySelectorAll('#sportNav .sport-item').forEach(item => {
+                item.onclick = function() {
+                    const filter = this.getAttribute('data-filter');
+                    if (filter) filterSport(filter, this);
+                };
+            });
+
+            // History
+            const btnHistory = getDom('btnHistory');
+            if (btnHistory) btnHistory.onclick = showBetHistory;
+
+            // Rules
+            const btnRules = getDom('btnRules');
+            if (btnRules) btnRules.onclick = showRules;
+
+            // Bet amount
+            const betAmount = getDom('betAmount');
+            if (betAmount) {
+                betAmount.oninput = updatePotentialWinCalc;
+                betAmount.onkeydown = function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); placeBet(); }
+                };
+            }
+
+            // Quick amounts
+            document.querySelectorAll('#quickAmounts .quick-amount').forEach(el => {
+                el.onclick = function() {
+                    setQuickAmount(this.getAttribute('data-amount'));
+                };
+            });
+
+            // Place bet
+            const placeBetBtn = getDom('placeBetBtn');
+            if (placeBetBtn) placeBetBtn.onclick = placeBet;
+
+            // Clear slip
+            const btnClearSlip = getDom('btnClearSlip');
+            if (btnClearSlip) btnClearSlip.onclick = clearBetSlip;
+
+            // Payment methods
+            document.querySelectorAll('#paymentMethods .payment-method').forEach(el => {
+                el.onclick = function() {
+                    document.querySelectorAll('#paymentMethods .payment-method').forEach(pm => pm.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPaymentMethod = this.getAttribute('data-method');
+                };
+            });
+
+            // Deposit
+            const btnConfirmDeposit = getDom('btnConfirmDeposit');
+            const btnCancelDeposit = getDom('btnCancelDeposit');
+            if (btnConfirmDeposit) btnConfirmDeposit.onclick = deposit;
+            if (btnCancelDeposit) btnCancelDeposit.onclick = () => closeModal('depositModal');
+
+            // Withdraw
+            const btnConfirmWithdraw = getDom('btnConfirmWithdraw');
+            const btnCancelWithdraw = getDom('btnCancelWithdraw');
+            if (btnConfirmWithdraw) btnConfirmWithdraw.onclick = withdraw;
+            if (btnCancelWithdraw) btnCancelWithdraw.onclick = () => closeModal('withdrawModal');
+
+            // Success close
+            const btnCloseSuccess = getDom('btnCloseSuccess');
+            if (btnCloseSuccess) btnCloseSuccess.onclick = () => closeModal('successModal');
+
+            // History close
+            const btnCloseHistory = getDom('btnCloseHistory');
+            if (btnCloseHistory) btnCloseHistory.onclick = () => closeModal('historyModal');
+
+            // Modal overlays
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.onclick = function(e) {
+                    if (e.target === this) this.classList.remove('active');
+                };
+            });
+
+            // Escape
+            document.onkeydown = function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+                    const authOverlay = getDom('authOverlay');
+                    if (authOverlay && authOverlay.classList.contains('active')) closeAuthOverlay();
+                }
+            };
+        }
+
+        // ==================== RENDER MATCHES ====================
+        function renderMatches(filter) {
+            filter = filter || 'all';
+            currentSportFilter = filter;
+            const container = getDom('matchesContainer');
+            if (!container) return;
+            let matches = matchesDB;
+            if (filter === 'live') matches = matchesDB.filter(m => m.status === 'live');
+            else if (filter !== 'all') matches = matchesDB.filter(m => m.sport === filter);
+            const matchCount = getDom('matchCount');
+            if (matchCount) matchCount.textContent = matches.length + ' trận';
+
+            const selectedMap = {};
+            betSlip.forEach(b => { selectedMap[b.matchId] = b.type; });
+
+            let html = '';
+            matches.forEach(match => {
+                const isLive = match.status === 'live';
+                const scoreDisplay = isLive ?
+                    `<span class="team-score">${match.homeScore} - ${match.awayScore}</span>` :
+                    '<span class="team-score vs">VS</span>';
+                const oddsEntries = match.sport === 'bongda' ? [
+                    { type: 'home', label: 'Chủ nhà', value: match.odds.home },
+                    { type: 'draw', label: 'Hòa', value: match.odds.draw },
+                    { type: 'away', label: 'Khách', value: match.odds.away }
+                ] : [
+                    { type: 'home', label: match.home, value: match.odds.home },
+                    { type: 'away', label: match.away, value: match.odds.away }
+                ];
+                const selectedType = selectedMap[match.id] || '';
+                let oddsHtml = '';
+                oddsEntries.forEach(odd => {
+                    const isSelected = (selectedType === odd.type) ? ' selected' : '';
+                    oddsHtml += `<div class="odd-box${isSelected}" data-match-id="${match.id}" data-type="${odd.type}" data-odds="${odd.value}" data-label="${odd.label.replace(/"/g, '&quot;')}" data-match-name="${match.home} vs ${match.away}">
+                        <div class="odd-label">${odd.label}</div>
+                        <div class="odd-value">${odd.value.toFixed(2)}</div>
+                    </div>`;
+                });
+                html += `<div class="match-card${isLive ? ' live' : ''}">
+                    <div class="match-league"><span>${match.league}</span>${isLive ? `<span class="match-minute">🔴 Phút ${match.minute}</span>` : `<span>📅 ${match.time}</span>`}</div>
+                    <div class="match-teams">
+                        <div class="team-block"><div class="team-name">${match.home}</div></div>
+                        ${scoreDisplay}
+                        <div class="team-block"><div class="team-name">${match.away}</div></div>
+                    </div>
+                    <div class="odds-row">${oddsHtml}</div>
+                </div>`;
+            });
+            container.innerHTML = html || '<p style="text-align:center; padding:50px; color: var(--text-secondary);">Không có trận đấu nào</p>';
+
+            // Gán sự kiện
+            container.querySelectorAll('.odd-box').forEach(box => {
+                box.onclick = function(e) {
+                    e.preventDefault(); e.stopPropagation();
+                    toggleBetSelection(
+                        parseInt(this.getAttribute('data-match-id')),
+                        this.getAttribute('data-type'),
+                        parseFloat(this.getAttribute('data-odds')),
+                        this.getAttribute('data-label'),
+                        this.getAttribute('data-match-name')
+                    );
+                };
+            });
+        }
+
+        // ==================== BET SLIP ====================
+        function toggleBetSelection(matchId, type, odds, label, matchName) {
+            const existingIndex = betSlip.findIndex(b => b.matchId === matchId);
+            if (existingIndex >= 0) {
+                if (betSlip[existingIndex].type === type) betSlip.splice(existingIndex, 1);
+                else betSlip[existingIndex] = { matchId, type, odds, label, matchName };
+            } else {
+                betSlip.push({ matchId, type, odds, label, matchName });
+            }
+            updateBetSlipUI();
+            renderMatches(currentSportFilter);
+            saveCurrentUser();
+        }
+
+        function updateBetSlipUI() {
+            const container = getDom('betSlipSelections');
+            const footer = getDom('betSlipFooter');
+            const countEl = getDom('betCount');
+            if (!container || !footer || !countEl) return;
+            countEl.textContent = betSlip.length;
+            if (betSlip.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Chọn một trận đấu và nhấp vào tỷ lệ cược để bắt đầu</p>';
+                footer.style.display = 'none';
+                const betAmount = getDom('betAmount');
+                if (betAmount) betAmount.value = '';
+                return;
+            }
+            let html = '';
+            let totalOdds = 1;
+            betSlip.forEach((bet, index) => {
+                totalOdds *= bet.odds;
+                html += `<div class="bet-selection">
+                    <div class="bet-selection-info">
+                        <div class="bet-selection-match">${bet.matchName}</div>
+                        <div class="bet-selection-pick">${bet.label}</div>
+                    </div>
+                    <div class="bet-selection-odds">${bet.odds.toFixed(2)}</div>
+                    <button class="bet-remove" data-index="${index}" type="button">✕</button>
+                </div>`;
+            });
+            container.innerHTML = html;
+            const totalOddsDisplay = getDom('totalOddsDisplay');
+            if (totalOddsDisplay) totalOddsDisplay.textContent = totalOdds.toFixed(2);
+            footer.style.display = 'block';
+
+            container.querySelectorAll('.bet-remove').forEach(btn => {
+                btn.onclick = function(e) {
+                    e.preventDefault(); e.stopPropagation();
+                    removeBetSelection(parseInt(this.getAttribute('data-index')));
+                };
+            });
+            updatePotentialWinCalc();
+        }
+
+        function removeBetSelection(index) {
+            betSlip.splice(index, 1);
+            updateBetSlipUI();
+            renderMatches(currentSportFilter);
+            saveCurrentUser();
+        }
+
+        function clearBetSlip() {
+            betSlip = [];
+            const betAmount = getDom('betAmount');
+            if (betAmount) betAmount.value = '';
+            updateBetSlipUI();
+            renderMatches(currentSportFilter);
+            saveCurrentUser();
+            showToast('Đã xóa tất cả lựa chọn', 'info');
+        }
+
+        function updatePotentialWinCalc() {
+            const betAmount = getDom('betAmount');
+            const potentialWin = getDom('potentialWin');
+            if (!betAmount || !potentialWin) return;
+            const amount = parseFloat(betAmount.value) || 0;
+            let totalOdds = 1;
+            betSlip.forEach(b => totalOdds *= b.odds);
+            potentialWin.textContent = Math.floor(amount * totalOdds).toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        function setQuickAmount(amount) {
+            const betAmount = getDom('betAmount');
+            if (!betAmount) return;
+            betAmount.value = amount === 'all' ? userBalance : parseInt(amount);
+            updatePotentialWinCalc();
+            betAmount.focus();
+        }
+
+        function placeBet() {
+            const betAmount = getDom('betAmount');
+            if (!betAmount) return;
+            const amount = parseInt(betAmount.value);
+            if (!amount || amount < 10000) { showToast('Số tiền tối thiểu là 10,000 VNĐ', 'error'); return; }
+            if (betSlip.length === 0) { showToast('Vui lòng chọn ít nhất 1 lựa chọn', 'error'); return; }
+            if (amount > userBalance) { showToast('Số dư không đủ! Vui lòng nạp thêm.', 'error'); return; }
+
+            let totalOdds = 1;
+            betSlip.forEach(b => totalOdds *= b.odds);
+            const potentialWin = Math.floor(amount * totalOdds);
+            deductBalance(amount);
+
+            const betRecord = {
+                id: Date.now(),
+                date: new Date().toLocaleString('vi-VN'),
+                matches: betSlip.map(b => b.matchName + ' - ' + b.label),
+                amount: amount,
+                odds: totalOdds.toFixed(2),
+                potentialWin: potentialWin,
+                status: 'pending',
+                username: currentUser ? currentUser.username : 'guest'
+            };
+            try {
+                let history = JSON.parse(localStorage.getItem('betking_history') || '[]');
+                history.unshift(betRecord);
+                if (history.length > 50) history = history.slice(0, 50);
+                localStorage.setItem('betking_history', JSON.stringify(history));
+            } catch (e) {}
+
+            const successTitle = getDom('successTitle');
+            const successMessage = getDom('successMessage');
+            if (successTitle) successTitle.textContent = '🎉 Đặt cược thành công!';
+            if (successMessage) {
+                successMessage.innerHTML = `
+                    <p>Bạn đã đặt <strong>${amount.toLocaleString('vi-VN')} VNĐ</strong></p>
+                    <p>Tổng tỷ lệ: <strong>${totalOdds.toFixed(2)}</strong></p>
+                    <p style="color: var(--green); font-size: 18px;">Thắng tiềm năng: <strong>${potentialWin.toLocaleString('vi-VN')} VNĐ</strong></p>
+                    <p style="color: var(--text-secondary); font-size: 12px;">Kết quả sẽ được cập nhật sau khi trận đấu kết thúc</p>
+                `;
+            }
+            openModal('successModal');
+            clearBetSlip();
+        }
+
+        // ==================== BALANCE ====================
+        function deductBalance(amount) {
+            if (userBalance >= amount) {
+                userBalance -= amount;
+                updateBalanceDisplayAll();
+                saveCurrentUser();
+                return true;
+            }
+            return false;
+        }
+
+        function addBalance(amount) {
+            userBalance += amount;
+            updateBalanceDisplayAll();
+            saveCurrentUser();
+            showToast('Đã cộng ' + amount.toLocaleString('vi-VN') + ' VNĐ vào tài khoản!', 'success');
+        }
+
+        function updateBalanceDisplayAll() {
+            const bd = getDom('balanceDisplay');
+            if (bd) bd.textContent = userBalance.toLocaleString('vi-VN');
+            const wb = getDom('withdrawBalance');
+            if (wb) wb.textContent = userBalance.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        // ==================== DEPOSIT / WITHDRAW ====================
+        function deposit() {
+            const input = getDom('depositAmountInput');
+            if (!input) return;
+            const amount = parseInt(input.value);
+            if (!amount || amount < 50000) { showToast('Số tiền tối thiểu là 50,000 VNĐ', 'error'); return; }
+            setTimeout(() => {
+                addBalance(amount);
+                closeModal('depositModal');
+                input.value = '';
+                const methodNames = { bank: 'Chuyển khoản', momo: 'Momo', zalopay: 'ZaloPay', crypto: 'USDT' };
+                const st = getDom('successTitle'); if (st) st.textContent = '✅ Nạp tiền thành công';
+                const sm = getDom('successMessage');
+                if (sm) sm.innerHTML = `<p>+${amount.toLocaleString('vi-VN')} VNĐ</p><p>Phương thức: ${methodNames[selectedPaymentMethod] || 'Unknown'}</p><p>Số dư: <strong style="color: var(--green);">${userBalance.toLocaleString('vi-VN')} VNĐ</strong></p>`;
+                openModal('successModal');
+            }, 800);
+        }
+
+        function withdraw() {
+            const amtInput = getDom('withdrawAmountInput');
+            const accInput = getDom('withdrawAccount');
+            const bankInput = getDom('withdrawBank');
+            const nameInput = getDom('withdrawName');
+            if (!amtInput || !accInput || !bankInput || !nameInput) return;
+            const amount = parseInt(amtInput.value);
+            const account = accInput.value.trim();
+            const bank = bankInput.value.trim();
+            const name = nameInput.value.trim();
+            if (!amount || amount < 50000) { showToast('Số tiền tối thiểu 50,000 VNĐ', 'error'); return; }
+            if (amount > userBalance) { showToast('Số dư không đủ!', 'error'); return; }
+            if (!account || !bank || !name) { showToast('Vui lòng điền đầy đủ thông tin', 'error'); return; }
+            deductBalance(amount);
+            closeModal('withdrawModal');
+            amtInput.value = ''; accInput.value = ''; bankInput.value = ''; nameInput.value = '';
+            const st = getDom('successTitle'); if (st) st.textContent = '✅ Rút tiền thành công';
+            const sm = getDom('successMessage');
+            if (sm) sm.innerHTML = `<p>-${amount.toLocaleString('vi-VN')} VNĐ</p><p>Ngân hàng: ${bank}</p><p>STK: ${account}</p><p>Chủ TK: ${name}</p><p>Số dư còn lại: <strong style="color: var(--green);">${userBalance.toLocaleString('vi-VN')} VNĐ</strong></p><p style="color: var(--text-secondary); font-size: 12px;">Tiền sẽ về trong 5-15 phút</p>`;
+            openModal('successModal');
+            showToast('Yêu cầu rút tiền đã được gửi!', 'success');
+        }
+
+        // ==================== HISTORY ====================
+        function showBetHistory() {
+            const hc = getDom('historyContent');
+            if (!hc) return;
+            try { var history = JSON.parse(localStorage.getItem('betking_history') || '[]'); }
+            catch (e) { var history = []; }
+            if (history.length === 0) {
+                hc.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding:20px;">Chưa có lịch sử cược nào</p>';
+            } else {
+                hc.innerHTML = history.map(h => `
+                    <div style="background:#141b28;padding:12px;border-radius:8px;margin-bottom:8px;border:1px solid var(--border);">
+                        <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                            <span style="font-size:12px;color:var(--text-secondary);">${h.date}</span>
+                            <span style="font-size:11px;padding:3px 8px;border-radius:10px;background:${h.status==='win'?'#00c85333':h.status==='lose'?'#ff174433':'#ffd70033'};color:${h.status==='win'?'#00c853':h.status==='lose'?'#ff1744':'#ffd700'};">${h.status==='win'?'THẮNG':h.status==='lose'?'THUA':'CHỜ'}</span>
+                        </div>
+                        <div style="font-size:13px;margin-bottom:5px;">${h.matches.join(' + ')}</div>
+                        <div style="display:flex;justify-content:space-between;">
+                            <span>Cược: <strong>${h.amount.toLocaleString('vi-VN')} VNĐ</strong></span>
+                            <span>Tỷ lệ: <strong>${h.odds}</strong></span>
+                            <span style="color:var(--green);">Thắng: <strong>${h.potentialWin.toLocaleString('vi-VN')} VNĐ</strong></span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            openModal('historyModal');
+        }
+
+        function showRules() {
+            const hc = getDom('historyContent');
+            if (!hc) return;
+            hc.innerHTML = `<div style="text-align:left;line-height:1.8;"><h4 style="color:var(--accent);">📖 Luật chơi</h4><p>1. Chọn trận đấu → nhấp tỷ lệ cược</p><p>2. Nhập tiền cược (tối thiểu 10K)</p><p>3. Tổng tỷ lệ = tích các tỷ lệ</p><p>4. Tiền thắng = Cược × Tổng tỷ lệ</p><p style="color:var(--accent);">⚠️ 18+</p></div>`;
+            openModal('historyModal');
+        }
+
+        // ==================== UTILS ====================
+        function filterSport(sport, element) {
+            document.querySelectorAll('#sportNav .sport-item').forEach(el => el.classList.remove('active'));
+            if (element) element.classList.add('active');
+            renderMatches(sport);
+        }
+
+        function updateLiveMatches() {
+            let needsUpdate = false;
+            matchesDB.forEach(match => {
+                if (match.status === 'live') {
+                    const f = (Math.random() - 0.5) * 0.1;
+                    if (match.odds.home) match.odds.home = Math.max(1.1, +(match.odds.home + f).toFixed(2));
+                    if (match.odds.draw) match.odds.draw = Math.max(1.5, +(match.odds.draw + f).toFixed(2));
+                    if (match.odds.away) match.odds.away = Math.max(1.1, +(match.odds.away + f).toFixed(2));
+                    if (typeof match.minute === 'number') match.minute += Math.floor(Math.random() * 3);
+                    needsUpdate = true;
+                }
+            });
+            if (needsUpdate && (currentSportFilter === 'live' || currentSportFilter === 'all')) renderMatches(currentSportFilter);
+        }
+
+        function showToast(message, type) {
+            const tc = getDom('toastContainer');
+            if (!tc) return;
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-' + (type || 'info');
+            toast.textContent = message;
+            tc.appendChild(toast);
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3000);
+        }
+
+        function openModal(id) { const m = getDom(id); if (m) m.classList.add('active'); }
+        function closeModal(id) { const m = getDom(id); if (m) m.classList.remove('active'); }
+        function openDepositModal() {
+            const inp = getDom('depositAmountInput'); if (inp) inp.value = '';
+            openModal('depositModal');
+        }
+        function openWithdrawModal() {
+            updateBalanceDisplayAll();
+            const inp = getDom('withdrawAmountInput'); if (inp) inp.value = '';
+            openModal('withdrawModal');
+        }
+
+        // ==================== START ====================
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
+```
